@@ -9,8 +9,8 @@ project(aRibeiroTests)
 #
 # John 3:16
 
-set( ARIBEIRO_FIND_LIBS UsingFindPackage CACHE STRING "Use find_package or download from GitHUB." )
-set_property(CACHE ARIBEIRO_FIND_LIBS PROPERTY STRINGS UsingFindPackage DownloadSource)
+set( ARIBEIRO_FIND_LIBS None CACHE STRING "Use find_package or download from GitHUB." )
+set_property(CACHE ARIBEIRO_FIND_LIBS PROPERTY STRINGS None UsingFindPackage DownloadSource)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "CMake")
@@ -45,6 +45,11 @@ elseif(ARIBEIRO_FIND_LIBS STREQUAL UsingFindPackage)
     add_library(aRibeiroPlatform INTERFACE)
     target_link_libraries(aRibeiroPlatform INTERFACE ${ARIBEIROPLATFORM_LIBRARIES})
     include_directories(${ARIBEIROPLATFORM_INCLUDE_DIR})
+
+else()
+
+    message(STATUS "You need to choose the ARIBEIRO_FIND_LIBS method")
+    return()
 
 endif()
 
