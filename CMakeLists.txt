@@ -9,6 +9,9 @@ project(aRibeiroTests)
 #
 # John 3:16
 
+set( ARIBEIRO_FIND_LIBS UsingFindPackage CACHE STRING "Use find_package or download from GitHUB." )
+set_property(CACHE ARIBEIRO_FIND_LIBS PROPERTY STRINGS UsingFindPackage DownloadSource)
+
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "CMake")
 
@@ -25,8 +28,26 @@ set(LIBS_REPOSITORY_URL "https://github.com/A-Ribeiro/public_libs/raw/main")
 set(GIT_DOWNLOAD_METHOD SSH) #HTTPS
 
 include(cmake/include.cmake)
-include(cmake/libs/libaRibeiroCore.cmake)
-include(cmake/libs/libaRibeiroPlatform.cmake)
+
+if(ARIBEIRO_FIND_LIBS STREQUAL DownloadSource)
+
+    include(cmake/libs/libaRibeiroCore.cmake)
+    include(cmake/libs/libaRibeiroPlatform.cmake)
+
+elseif(ARIBEIRO_FIND_LIBS STREQUAL UsingFindPackage)
+
+    find_package(aRibeiroCore REQUIRED)
+    add_library(aRibeiroCore INTERFACE)
+    target_link_libraries(aRibeiroCore INTERFACE ${ARIBEIROCORE_LIBRARIES})
+    include_directories(${ARIBEIROCORE_INCLUDE_DIR})
+
+    find_package(aRibeiroPlatform REQUIRED)
+    add_library(aRibeiroPlatform INTERFACE)
+    target_link_libraries(aRibeiroPlatform INTERFACE ${ARIBEIROPLATFORM_LIBRARIES})
+    include_directories(${ARIBEIROPLATFORM_INCLUDE_DIR})
+
+endif()
+
 
 #include the projects
 
