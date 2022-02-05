@@ -11,6 +11,12 @@ I tried to cover all major funcionalities from the libraries I developed.
 
 I use this code to guarantee the code to behave the same way on Linux, Mac(Intel) and Windows.
 
+## GitHUB Link
+
+https://github.com/A-Ribeiro/aRibeiroCore
+
+https://github.com/A-Ribeiro/aRibeiroPlatform
+
 ## Notes
 
 ### Trigger a SIGINT on XCode
