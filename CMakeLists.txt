@@ -48,7 +48,9 @@ elseif(ARIBEIRO_FIND_LIBS STREQUAL UsingFindPackage)
 
 else()
 
-    message(STATUS "You need to choose the ARIBEIRO_FIND_LIBS method")
+    message(NOTICE "You need to set ARIBEIRO_FIND_LIBS with:")
+    message(NOTICE "    UsingFindPackage -> To use the libs installed in the system.")
+    message(NOTICE "    DownloadSource   -> To download the source from GitHUB.")
     return()
 
 endif()
