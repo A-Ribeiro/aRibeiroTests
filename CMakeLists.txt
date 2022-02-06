@@ -12,6 +12,9 @@ project(aRibeiroTests)
 set( ARIBEIRO_FIND_LIBS None CACHE STRING "Use find_package or download from GitHUB." )
 set_property(CACHE ARIBEIRO_FIND_LIBS PROPERTY STRINGS None UsingFindPackage DownloadSource)
 
+set( ARIBEIRO_GIT_DOWNLOAD_METHOD None CACHE STRING "The GitHUB download method." )
+set_property(CACHE ARIBEIRO_GIT_DOWNLOAD_METHOD PROPERTY STRINGS None SSH HTTPS)
+
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "CMake")
 
@@ -25,7 +28,23 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake-modules)
 
 #the path we need to get the custom lib versions
 set(LIBS_REPOSITORY_URL "https://github.com/A-Ribeiro/public_libs/raw/main")
-set(GIT_DOWNLOAD_METHOD SSH) #HTTPS
+set(GIT_DOWNLOAD_METHOD ${ARIBEIRO_GIT_DOWNLOAD_METHOD})
+
+if (ARIBEIRO_GIT_DOWNLOAD_METHOD STREQUAL None)
+    message("\nYou need to set ARIBEIRO_GIT_DOWNLOAD_METHOD with:")
+    message("    SSH   -> To use the SSH gitHUB URL.")
+    message("    HTTPS -> To use the HTTPS gitHUB URL.")
+endif()
+
+if (ARIBEIRO_FIND_LIBS STREQUAL None)
+    message("\nYou need to set ARIBEIRO_FIND_LIBS with:")
+    message("    UsingFindPackage -> To use the libs installed in the system.")
+    message("    DownloadSource   -> To download the source from GitHUB.\n")
+endif()
+
+if ((ARIBEIRO_GIT_DOWNLOAD_METHOD STREQUAL None) OR (ARIBEIRO_FIND_LIBS STREQUAL None))
+    message( FATAL_ERROR "" )
+endif()
 
 include(cmake/include.cmake)
 
@@ -47,12 +66,7 @@ elseif(ARIBEIRO_FIND_LIBS STREQUAL UsingFindPackage)
     include_directories(${ARIBEIROPLATFORM_INCLUDE_DIR})
 
 else()
-
-    message(NOTICE "You need to set ARIBEIRO_FIND_LIBS with:")
-    message(NOTICE "    UsingFindPackage -> To use the libs installed in the system.")
-    message(NOTICE "    DownloadSource   -> To download the source from GitHUB.")
-    return()
-
+    message( FATAL_ERROR "You need to specify the lib source." )
 endif()
 
 
