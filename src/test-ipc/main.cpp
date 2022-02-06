@@ -21,7 +21,7 @@ int main(int argc, char* argv[]){
     // initialize self referencing of the main thread.
     PlatformThread::getMainThread();
 
-    printf("DSHOW CAMERA STREAMER\n"
+    printf("TEST InterProcess Communication\n"
         "\n"
         "For this is how God loved the world :\n"
         "he gave his only Son, so that everyone\n"
