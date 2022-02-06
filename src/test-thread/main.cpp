@@ -25,7 +25,7 @@ void test_PlatformTime_and_PlatformSleep() {
 
 #if !defined(OS_TARGET_win)
 
-    printf("PlatformSleep::sleepMillis(5): %lld\n", time.deltaTimeMicro);
+    printf("PlatformSleep::sleepMillis(5): %ld\n", time.deltaTimeMicro);
 
 #else
 
@@ -41,7 +41,7 @@ void test_PlatformTime_and_PlatformSleep() {
     time.update();
 
 #if !defined(OS_TARGET_win)
-    printf("PlatformSleep::busySleepMicro(300): %lld\n", time.deltaTimeMicro);
+    printf("PlatformSleep::busySleepMicro(300): %ld\n", time.deltaTimeMicro);
 #else
     printf("PlatformSleep::busySleepMicro(300): %I64d\n", time.deltaTimeMicro);
 #endif
