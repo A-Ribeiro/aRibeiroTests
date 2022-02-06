@@ -4,6 +4,7 @@
 using namespace aRibeiro;
 
 #include <stdio.h>
+#include <inttypes.h>//PRId64
 
 //
 // Test: PlatformTime PlatformSleep
@@ -23,29 +24,13 @@ void test_PlatformTime_and_PlatformSleep() {
     PlatformSleep::sleepMillis(5);
     time.update();
 
-#if !defined(OS_TARGET_win)
-
-    printf("PlatformSleep::sleepMillis(5): %ld\n", time.deltaTimeMicro);
-
-#else
-
-    printf("PlatformSleep::sleepMillis(5): %I64d\n", time.deltaTimeMicro);
-
-#endif
-
-
-
+    printf("PlatformSleep::sleepMillis(5): %" PRId64 "\n", time.deltaTimeMicro);
 
     time.update();
     PlatformSleep::busySleepMicro(300);
     time.update();
 
-#if !defined(OS_TARGET_win)
-    printf("PlatformSleep::busySleepMicro(300): %ld\n", time.deltaTimeMicro);
-#else
-    printf("PlatformSleep::busySleepMicro(300): %I64d\n", time.deltaTimeMicro);
-#endif
-
+    printf("PlatformSleep::busySleepMicro(300): %" PRId64 "\n", time.deltaTimeMicro);
 
     time.update();
     PlatformSleep::sleepMillis(2000);
