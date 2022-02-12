@@ -9,12 +9,6 @@ project(aRibeiroTests)
 #
 # John 3:16
 
-set( ARIBEIRO_FIND_LIBS None CACHE STRING "Use find_package or download from GitHUB." )
-set_property(CACHE ARIBEIRO_FIND_LIBS PROPERTY STRINGS None UsingFindPackage DownloadSource)
-
-set( ARIBEIRO_GIT_DOWNLOAD_METHOD None CACHE STRING "The GitHUB download method." )
-set_property(CACHE ARIBEIRO_GIT_DOWNLOAD_METHOD PROPERTY STRINGS None SSH HTTPS)
-
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "CMake")
 
@@ -30,45 +24,10 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake-modules)
 set(LIBS_REPOSITORY_URL "https://github.com/A-Ribeiro/public_libs/raw/main")
 set(GIT_DOWNLOAD_METHOD ${ARIBEIRO_GIT_DOWNLOAD_METHOD})
 
-if (ARIBEIRO_GIT_DOWNLOAD_METHOD STREQUAL None)
-    message("\nYou need to set ARIBEIRO_GIT_DOWNLOAD_METHOD with:")
-    message("    SSH   -> To use the SSH gitHUB URL.")
-    message("    HTTPS -> To use the HTTPS gitHUB URL.")
-endif()
-
-if (ARIBEIRO_FIND_LIBS STREQUAL None)
-    message("\nYou need to set ARIBEIRO_FIND_LIBS with:")
-    message("    UsingFindPackage -> To use the libs installed in the system.")
-    message("    DownloadSource   -> To download the source from GitHUB.\n")
-endif()
-
-if ((ARIBEIRO_GIT_DOWNLOAD_METHOD STREQUAL None) OR (ARIBEIRO_FIND_LIBS STREQUAL None))
-    message( FATAL_ERROR "" )
-endif()
-
 include(cmake/include.cmake)
-
-if(ARIBEIRO_FIND_LIBS STREQUAL DownloadSource)
-
-    include(cmake/libs/libaRibeiroCore.cmake)
-    include(cmake/libs/libaRibeiroPlatform.cmake)
-
-elseif(ARIBEIRO_FIND_LIBS STREQUAL UsingFindPackage)
-
-    find_package(aRibeiroCore REQUIRED)
-    add_library(aRibeiroCore INTERFACE)
-    target_link_libraries(aRibeiroCore INTERFACE ${ARIBEIROCORE_LIBRARIES})
-    include_directories(${ARIBEIROCORE_INCLUDE_DIR})
-
-    find_package(aRibeiroPlatform REQUIRED)
-    add_library(aRibeiroPlatform INTERFACE)
-    target_link_libraries(aRibeiroPlatform INTERFACE ${ARIBEIROPLATFORM_LIBRARIES})
-    include_directories(${ARIBEIROPLATFORM_INCLUDE_DIR})
-
-else()
-    message( FATAL_ERROR "You need to specify the lib source." )
-endif()
-
+include(cmake/libs/libaRibeiroCore.cmake)
+include(cmake/libs/libaRibeiroPlatform.cmake)
+include(cmake/libs/libaRibeiroData.cmake)
 
 #include the projects
 
