@@ -17,6 +17,16 @@ https://github.com/A-Ribeiro/aRibeiroCore
 
 https://github.com/A-Ribeiro/aRibeiroPlatform
 
+https://github.com/A-Ribeiro/aRibeiroData
+
+https://github.com/A-Ribeiro/aRibeiroWrappers
+
+https://github.com/A-Ribeiro/aRibeiroTests
+
+### Tools
+
+https://github.com/A-Ribeiro/font2bitmap
+
 ## Notes
 
 ### Trigger a SIGINT on XCode
