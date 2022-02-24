@@ -22,13 +22,13 @@ You need to fetch the repo and the submodules also.
 __HTTPS__
 
 ```bash
-git clone --recurse-submodules https://github.com/A-Ribeiro/OpenGLStarter.git
+git clone --recurse-submodules https://github.com/A-Ribeiro/aRibeiroTests.git
 ```
 
 __SSH__
 
 ```bash
-git clone --recurse-submodules git@github.com:A-Ribeiro/OpenGLStarter.git
+git clone --recurse-submodules git@github.com:A-Ribeiro/aRibeiroTests.git
 ```
 
 ### b) Clone With Multiple Commands
@@ -36,7 +36,7 @@ git clone --recurse-submodules git@github.com:A-Ribeiro/OpenGLStarter.git
 __HTTPS__
 
 ```bash
-git clone https://github.com/A-Ribeiro/OpenGLStarter.git
+git clone https://github.com/A-Ribeiro/aRibeiroTests.git
 cd OpenGLStarter
 git submodule init
 git submodule update
@@ -45,7 +45,7 @@ git submodule update
 __SSH__
 
 ```bash
-git clone git@github.com:A-Ribeiro/OpenGLStarter.git
+git clone git@github.com:A-Ribeiro/aRibeiroTests.git
 cd OpenGLStarter
 git submodule init
 git submodule update
