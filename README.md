@@ -11,6 +11,52 @@ I tried to cover all major funcionalities from the libraries I developed.
 
 I use this code to guarantee the code to behave the same way on Linux, Mac(Intel) and Windows.
 
+## How to Clone?
+
+This library uses git submodules.
+
+You need to fetch the repo and the submodules also.
+
+### a) Clone With Single Command
+
+__HTTPS__
+
+```bash
+git clone --recurse-submodules https://github.com/A-Ribeiro/OpenGLStarter.git
+```
+
+__SSH__
+
+```bash
+git clone --recurse-submodules git@github.com:A-Ribeiro/OpenGLStarter.git
+```
+
+### b) Clone With Multiple Commands
+
+__HTTPS__
+
+```bash
+git clone https://github.com/A-Ribeiro/OpenGLStarter.git
+cd OpenGLStarter
+git submodule init
+git submodule update
+```
+
+__SSH__
+
+```bash
+git clone git@github.com:A-Ribeiro/OpenGLStarter.git
+cd OpenGLStarter
+git submodule init
+git submodule update
+```
+
+### c) update only the submodules
+
+```bash
+git submodule update
+```
+
 ## GitHUB Link
 
 https://github.com/A-Ribeiro/aRibeiroCore
