@@ -205,6 +205,7 @@ void test_Util() {
 
 int main(int argc, char* argv[]) {
 
+    printf("\nNumber of system threads: %i\n\n", PlatformThread::QueryNumberOfSystemThreads());
 
     printf("  press any key to do path test...\n"); fgetc(stdin);
     test_PlatformPath(argv[0]);
