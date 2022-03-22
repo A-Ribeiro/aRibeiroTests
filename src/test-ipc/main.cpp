@@ -34,7 +34,7 @@ int main(int argc, char* argv[]){
     //std::string file_path = path + PlatformPath::SEPARATOR + std::string("config.cfg");
 
     
-    PlatformBufferIPC global_info_ipc("app_name", PlatformBufferIPC_READ | PlatformBufferIPC_WRITE, sizeof(GlobalInfo));
+    PlatformBufferIPC global_info_ipc("app_name", sizeof(GlobalInfo));
     {
         GlobalInfo *globalInfo = (GlobalInfo *)global_info_ipc.data;
         if (global_info_ipc.isFirstProcess()) {

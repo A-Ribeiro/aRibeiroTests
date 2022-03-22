@@ -35,4 +35,6 @@ add_subdirectory(src/test-ipc)
 add_subdirectory(src/test-socket-tcp)
 add_subdirectory(src/test-socket-udp)
 
+add_subdirectory(src/test-parallel-sort)
+
 add_subdirectory(src/debug-console)
