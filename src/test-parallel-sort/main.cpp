@@ -127,13 +127,19 @@ public:
 
     }
 
-    void multiThread(T*_array, int size, int job_thread_size = 1<<8, T*pre_alloc_tmp = NULL) {
+    int threadCount()const {
+        return threads.size();
+    }
+
+    void multiThread(T*_array, int size, T*pre_alloc_tmp = NULL) {
         T *_aux;
         if (pre_alloc_tmp == NULL)
             _aux = (T *)malloc_aligned( sizeof(T)*size );
         else
             _aux = pre_alloc_tmp;
 
+
+        int job_thread_size = size / threadCount();// 1 << 16
 
         //from 1 to job_thread_size, do normal sorting
         MergeSort_Job<T> job;
@@ -336,7 +342,7 @@ int main(int argc, char* argv[]){
     for(int i=0;i<count;i++)
         numbers[i] = Random::getRange(-9999,9999);
     timer.update();
-    mergeSort.multiThread(&numbers[0], numbers.size(), 1<<16, &tmp_buff[0]);
+    mergeSort.multiThread(&numbers[0], numbers.size(),&tmp_buff[0]);
     timer.update();
     printf("mergeSort.multiThread -> %f\n", timer.deltaTime);
     merge_sort = timer.deltaTime;
