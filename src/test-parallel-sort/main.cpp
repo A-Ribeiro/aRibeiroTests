@@ -23,6 +23,9 @@ void check_sorting(const std::vector<T> &array) {
 }
 
 int main(int argc, char* argv[]){
+
+    setGlobalThreadPriority(GlobalThreadPriority_Realtime);
+
     PlatformSignal::Set( signal_handler );
     PlatformPath::setWorkingPath(PlatformPath::getExecutablePath(argv[0]));
     // initialize self referencing of the main thread.
