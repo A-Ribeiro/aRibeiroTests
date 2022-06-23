@@ -5,10 +5,11 @@ using namespace aRibeiro;
 ObjectQueue<int> queue;
 
 void thread(int n) {
+    bool isSignaled;
     printf("start thread %i\n", n);
     while ( !PlatformThread::getCurrentThread()->isCurrentThreadInterrupted() ) {
-        int v = queue.dequeue();
-        if (queue.isSignaled())
+        int v = queue.dequeue(&isSignaled);
+        if (isSignaled)
             break;
         printf("[thread %i]: %i\n", n, v);
         PlatformSleep::sleepMillis( Random::getRange(300,500) );
