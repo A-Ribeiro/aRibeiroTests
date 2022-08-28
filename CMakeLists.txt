@@ -37,5 +37,6 @@ add_subdirectory(src/test-socket-udp)
 
 add_subdirectory(src/test-parallel-sort)
 add_subdirectory(src/test-inplace-sort)
+add_subdirectory(src/test-onabort-fnc)
 
 add_subdirectory(src/debug-console)
