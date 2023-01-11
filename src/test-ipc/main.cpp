@@ -12,7 +12,8 @@ void signal_handler(int signal) {
     printf("   ****************** signal_handler **********************\n");
     to_exit = true;
 
-    PlatformThread::getMainThread()->interrupt();
+    //PlatformThread::getMainThread()->interrupt();
+    ARIBEIRO_ABORT(true, "Abort Test");
 }
 
 int main(int argc, char* argv[]){

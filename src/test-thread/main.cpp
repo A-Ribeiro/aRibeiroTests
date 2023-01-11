@@ -52,12 +52,18 @@ void Thread1_IncrementCounter() {
     PlatformSleep::sleepMillis(3000);
     printf("Thread 1 SharedCounter Increment...\n");
     sharedCounter++;
+    if (PlatformThread::isCurrentThreadInterrupted())
+        return;
     PlatformSleep::sleepMillis(3000);
     printf("Thread 1 SharedCounter Increment...\n");
     sharedCounter++;
+    if (PlatformThread::isCurrentThreadInterrupted())
+        return;
     PlatformSleep::sleepMillis(3000);
     printf("Thread 1 SharedCounter Increment...\n");
     sharedCounter++;
+    if (PlatformThread::isCurrentThreadInterrupted())
+        return;
     PlatformSleep::sleepMillis(3000);
     printf("Thread 1 End...\n");
 }
@@ -67,7 +73,7 @@ void Thread2_CheckCounter() {
 
     printf("  Thread 2 Start...\n");
 
-    while (localCounter < 3) {
+    while (!PlatformThread::isCurrentThreadInterrupted() && localCounter < 3) {
         if (localCounter < sharedCounter) {
             printf("  Thread 2 Detected SharedCounter modification...\n");
             printf("  Thread 2 LocalCounter Increment...\n");
@@ -109,6 +115,9 @@ void Thread4_Mutex() {
 
 void test_PlatformThread_and_PlatformMutex() {
 
+    if (PlatformThread::isCurrentThreadInterrupted())
+        return;
+
     printf("---------------------------------------\n");
     printf("  test_PlatformThread\n");
     printf("---------------------------------------\n");
@@ -121,6 +130,9 @@ void test_PlatformThread_and_PlatformMutex() {
         t2.start();
     }
     printf("\n");
+
+    if (PlatformThread::isCurrentThreadInterrupted())
+        return;
 
     printf("  InterruptTest\n");
     printf("----------------\n");
@@ -137,7 +149,8 @@ void test_PlatformThread_and_PlatformMutex() {
 
     }
 
-
+    if (PlatformThread::isCurrentThreadInterrupted())
+        return;
     printf("\n");
 
     printf("  MutexTest\n");
@@ -202,8 +215,16 @@ void test_Util() {
     printf("\n");
 }
 
+void signal_handler(int signal) {
+    printf("   ****************** signal_handler **********************\n");
+
+    //PlatformThread::getMainThread()->interrupt();
+    ARIBEIRO_ABORT(true, "Abort Test");
+}
 
 int main(int argc, char* argv[]) {
+
+    PlatformSignal::Set(signal_handler);
 
     printf("\nNumber of system threads: %i\n\n", PlatformThread::QueryNumberOfSystemThreads());
 
@@ -212,11 +233,15 @@ int main(int argc, char* argv[]) {
     printf("  press any key to do time and sleep test...\n"); fgetc(stdin);
     test_PlatformTime_and_PlatformSleep();
     printf("  press any key to do thread and mutex test...\n"); fgetc(stdin);
+    if (PlatformThread::isCurrentThreadInterrupted())
+        return 0;
     test_PlatformThread_and_PlatformMutex();
     printf("  press any key to do util test...\n"); fgetc(stdin);
+    if (PlatformThread::isCurrentThreadInterrupted())
+        return 0;
     test_Util();
-
-
+    if (PlatformThread::isCurrentThreadInterrupted())
+        return 0;
     printf("  press any key to exit...\n");
     fgetc(stdin);
 

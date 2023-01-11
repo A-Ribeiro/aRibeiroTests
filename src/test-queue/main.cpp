@@ -17,7 +17,16 @@ void thread(int n) {
     printf("end thread %i\n", n);
 }
 
+void signal_handler(int signal) {
+    printf("   ****************** signal_handler **********************\n");
+
+    //PlatformThread::getMainThread()->interrupt();
+    ARIBEIRO_ABORT(true, "Abort Test");
+}
+
 int main(int argc, char* argv[]){
+    PlatformSignal::Set(signal_handler);
+
     PlatformPath::setWorkingPath(PlatformPath::getExecutablePath(argv[0]));
     // initialize self referencing of the main thread.
     PlatformThread::getMainThread();
