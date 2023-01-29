@@ -39,6 +39,8 @@ add_subdirectory(src/test-parallel-sort)
 add_subdirectory(src/test-inplace-sort)
 add_subdirectory(src/test-onabort-fnc)
 
+add_subdirectory(src/test-process)
+
 add_subdirectory(src/benchmark-sort)
 
 add_subdirectory(src/debug-console)
