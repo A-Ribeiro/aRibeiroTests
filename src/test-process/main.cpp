@@ -60,6 +60,11 @@ int main(int argc, char* argv[]){
     stdout_child_str_output = aRibeiro::StringUtil::trim((char*)raw_output.data());
 
 #else
+
+    PlatformProcess process("", StringUtil::parseArgv("\"string from app\""), INT32_MAX,
+        NULL,NULL,NULL
+    );
+    
 #endif
 
 
